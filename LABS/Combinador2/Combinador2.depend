@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1724633390 source:c:\users\daniv\onedrive\documentos\aeds2_2\combinador2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
