@@ -28,11 +28,7 @@ public class Palindromo{
     //Primeiro identifica se é "FIM" depois cria uma copia da string recebida que sera invertida depois comparada com a original
     //se for igual retorne true
     public static boolean isPalindromo(char[] palavra){ 
-
-        if (palavra.length == 3 && isFIM(palavra)){ 
-            return false; // Ignora a palavra 'FIM'
-        }
-
+        
         char[] copia;
         copia = new char[palavra.length];
         

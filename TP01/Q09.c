@@ -1,59 +1,42 @@
 #include <stdio.h>
 
-int main(){
+int main() {
     int n;
     double num;
 
     scanf("%d", &n);
 
-    //Abertura do arquivo para escrita
-
-    FILE *file;
-    file = fopen("arquivo.txt", "w");
-     if(file == NULL){
-      printf("erro ao abrir arquivo");
+    // Abertura do arquivo para escrita em binário
+    FILE *file = fopen("arquivo.txt", "wb");
+    if (file == NULL) {
+        printf("Erro ao abrir o arquivo para escrita.\n");
+        return 1;
     }
 
-    //Impresso dos valores lidos no arq
-
-    for(int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++) {
         scanf("%lf", &num);
-        fprintf(file, "%.3lf\n", num);
+        fwrite(&num, sizeof(double), 1, file);  // Gravação binária
     }
 
     fclose(file);
 
-    //reabertura do arq para ler
-
-    file = fopen("arquivo.txt", "r");
+    // Reabrir o arquivo para leitura
+    file = fopen("arquivo.txt", "rb");
     if (file == NULL) {
         printf("Erro ao abrir o arquivo para leitura.\n");
         return 1;
     }
 
-    // pular para final 
     fseek(file, 0, SEEK_END);
 
-    // impressao dos valores de tras pra frente
+    // Ler e imprimir os valores de trás para frente
     for (int i = 0; i < n; i++) {
-        long pos;
-
-        fseek(file, -2, SEEK_CUR); 
-        do {
-            pos = ftell(file);
-            fseek(file, -1, SEEK_CUR);
-        } while (fgetc(file) != '\n' && pos > 1);
-
-        pos = ftell(file);
-
-        fscanf(file, "%lf", &num);
-        printf("%.6lf\n", num);
-
-        fseek(file, pos, SEEK_SET);
+        fseek(file, -(i + 1) * sizeof(double), SEEK_END);
+        fread(&num, sizeof(double), 1, file);
+        printf("%g\n", num);
     }
 
     fclose(file);
-
 
     return 0;
 }
