@@ -62,6 +62,20 @@ public class Lista {
         N++;
 
     }
+
+    void Inserir(int x)throws Exception{
+        if(N >= array.length){
+            throw new Exception("Erro: falha ao inserir");
+        }
+
+        int pos;
+        for(pos = N - 1; pos >= 0 && array[pos] > x; pos--){
+            array[pos + 1] = array[pos];
+        }
+
+        array[pos + 1] = x;
+        N++;
+    }
  
     int RemoverInicio()throws Exception{
         if(N == 0){
@@ -111,13 +125,15 @@ public class Lista {
      public static void main(String[] args)throws Exception{
 
         Lista lista = new Lista(5);
-        lista.InserirInicio(3);
-        lista.InserirFim(2);
-        lista.InserirPos(1,1);
+       lista.Inserir(13);
+       lista.Inserir(12);
+       lista.Inserir(5);
+       lista.Inserir(3);
+       lista.Inserir(5);
         lista.Mostrar();
-        lista.RemoverFim();
+        /*lista.RemoverFim();
         lista.RemoverInicio();
-        lista.Mostrar();
+        lista.Mostrar();*/
 
 
 
