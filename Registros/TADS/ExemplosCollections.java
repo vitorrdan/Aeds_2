@@ -1,8 +1,6 @@
 package Registros.TADS;
 import java.util.*;
 
-
-
 public class ExemplosCollections {
 
     public static void main(String[] args){
@@ -30,6 +28,7 @@ public class ExemplosCollections {
             }
             
         }
+
 
         sc.close();
 
