@@ -107,9 +107,75 @@ public class ListaFlex {
         return count;
     }
 
+    public int MaiorElemento(){
+        int maior = primeiro.prox.elemento;
+        for(Celula i = primeiro.prox; i != null; i = i.prox){
+            if(i.elemento > maior){
+                maior = i.elemento;
+            }
+        }
+        return maior;
+    }
+
+    public int Soma(){
+        int soma = 0;
+        for(Celula i = primeiro.prox; i != null; i = i.prox){
+            soma += i.elemento;
+        }
+
+        return soma;
+    }
+
+    public boolean Pesquisa(int x)throws  Exception{
+        if(primeiro == ultimo){
+            throw new Exception("Lista vazia");
+        }
+        boolean resp = false;
+            for(Celula i = primeiro.prox; i != null; i = i.prox){
+                if(x == i.elemento){
+                    resp = true;
+                }
+            }
+
+        return resp;
+    }
+
+    public void Ordena()throws Exception{
+        if(primeiro == ultimo){
+            throw new Exception("Lista vazia");
+        }
+        for(Celula i = primeiro.prox; i != null; i = i.prox){
+            for(Celula j = primeiro.prox; j.prox != null; j = j.prox){
+                if(j.elemento > j.prox.elemento){
+                    int tmp = j.elemento;
+                    j.elemento = j.prox.elemento;
+                    j.prox.elemento = tmp;
+                }
+            }
+        }
+
+    }
+
 
     public static void main(String[] args)throws Exception{
-        
+        ListaFlex lista = new ListaFlex();
+        lista.inserirInicio(4);
+        lista.inserirInicio(3);
+        lista.inserirInicio(2);
+        lista.inserirFim(18);
+        lista.inserirPos(43,4);
+        lista.inserirPos(2, 2);
+        lista.inserirFim(1000);
+        lista.inserirFim(100);
+        lista.inserirFim(8);
+
+        System.out.println("Antes de ordenar: ");
+        lista.mostrar();
+        System.out.println("Depois de ordenar: ");
+        lista.Ordena();
+        lista.mostrar();
+
+      
     }
     
 }
